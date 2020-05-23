@@ -1,3 +1,5 @@
+// Signature
+
 class Signature {
     constructor() { //Paramètres du canvas
         this.canvas = document.getElementById("canvas");
@@ -29,13 +31,9 @@ class Signature {
             self.canvasResult()
         });
 
-        // this.canvas.addEventListener("mouseup", function (e) {
-        //     self.draw = false;
-        // });
-        document.addEventListener("mouseup", function (e) {
+       this.canvas.addEventListener("mouseup", function (e) {
             self.draw = false;
         });
-
 
         // Stop scrolling (touch)
         document.body.addEventListener("touchstart", function (e) {
@@ -55,7 +53,6 @@ class Signature {
                 e.preventDefault();
             }
         });
-
 
         // Touchpad
         this.canvas.addEventListener("touchstart", function (e) {
@@ -81,7 +78,6 @@ class Signature {
             var mouseEvent = new MouseEvent("mouseup", {});
             self.canvas.dispatchEvent(mouseEvent);
         });
-
 
         //Effacer
         this.clearButton.addEventListener("click", function (e) {
@@ -127,21 +123,3 @@ class Signature {
     }
 
 }
-
-/*
-<body>
-    <h1>Canvas</h1>
-    <div class="mise-en-page">
-        <div class="bloc-mise-en-page">
-            <h2>Signer /
-                <span id="bt-clear">nettoyer</span>)</h2>
-            <canvas id="canvas"></canvas>
-        </div>
-    </div> 
-</body>
-</html>
-https://jsbin.com/jimiqibago/edit?html,js,output
-*/
-
-// Création d'un objet signature
-const mySignature = new Signature();

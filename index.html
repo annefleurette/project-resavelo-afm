@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+        <link rel="stylesheet" href="style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+        <title>Carte interactive de location de vélos à Brisbane</title>
+        <meta name="description" content="La carte interactive de location de vélo permet d'afficher la liste des vélos disponibles en temps réel à Brisbane et d'effectuer une réservation.">
+    </head>
+    <body> 
+        <div class="container">
+            <section class="slider">
+                <a id="test" href="#">Test</a>
+            </section>
+            <section class="bike-booking">
+                <div class="bike-booking__map">
+                    <iframe width="50%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=152.64953613281253%2C-27.66832594367653%2C153.22631835937503%2C-27.269278554175017&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+                </div>
+                <div class="bike-booking__data">
+                    <h2>Détails de la station</h2>
+                    <div id="bike-booking__data__info-station">
+                    </div>
+                    <form>
+                        <div>
+                            <label for="name">Nom :</label>
+                            <input type="text" id="name" name="user_name" required min-length="2">
+                        </div>
+                        <div>
+                            <label for="surname">Prénom :</label>
+                            <input type="text" id="surname" name="user_surname" required min-length="2">
+                        </div>
+                        <div id="signature"></div>
+                        </div>
+                        <div class="button">
+                            <button id="submit" type="submit">Réserver</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </body>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="signature.js"></script>
+</html> 
