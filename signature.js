@@ -1,4 +1,4 @@
-// Signature
+// Class Signature
 
 class Signature {
     constructor() { //Paramètres du canvas
