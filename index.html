@@ -12,7 +12,7 @@
         <div class="container">
             <section class="slider">
             </section>
-            <section class="bike-booking">
+            <section id="bike-booking">
                 <div class="bike-booking__map">
                     <iframe width="50%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=152.64953613281253%2C-27.66832594367653%2C153.22631835937503%2C-27.269278554175017&amp;layer=mapnik" style="border: 1px solid black"></iframe>
                 </div>
@@ -23,16 +23,16 @@
                     <form>
                         <div>
                             <label for="name">Nom :</label>
-                            <input type="text" id="name" name="user_name" required min-length="2">
+                            <input type="text" id="name" name="user_name" minlength="2" required>
                         </div>
                         <div>
                             <label for="surname">Prénom :</label>
-                            <input type="text" id="surname" name="user_surname" required min-length="2">
+                            <input type="text" id="surname" name="user_surname" minlength="2" required>
                         </div>
-                        <div id="signature"></div>
+                        <div id="signature">
                         </div>
                         <div class="button">
-                            <button id="submit" type="submit">Réserver</button>
+                            <button id="submit" type="submit" disabled="true">Réserver</button>
                         </div>
                     </form>
                 </div>
