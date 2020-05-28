@@ -1,8 +1,8 @@
 // Class Signature
 
 class Signature {
-    constructor() { //Paramètres du canvas
-        this.canvas = document.getElementById("canvas");
+    constructor(targetElt, targetClear) { //Paramètres du canvas
+        this.canvas = document.getElementById(targetElt);
         this.ctx = this.canvas.getContext('2d');
         this.ctx.strokeStyle = '#000000';
         this.ctx.lineWidth = 3;
@@ -12,7 +12,7 @@ class Signature {
             y: 0
         };
         this.lastPosition = this.mousePosition;
-        this.clearButton = document.getElementById("bt-clear");
+        this.clearButton = document.getElementById(targetClear);
         this.canvas.width = 200;
         this.canvas.height = 150;
     }
