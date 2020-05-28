@@ -9,14 +9,14 @@ let surnamebooking = document.getElementById("surname");
 
 // FORMULAIRE DE RESERVATION
     // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
-    namebooking.addEventListener('input', (e) => {
+    namebooking.addEventListener('input', () => {
         let valuesurname = surnamebooking.value;
         let valuename = namebooking.nodeValue;
         if(isValid(valuename) && isValid(valuesurname)){
             booking.removeAttribute("disabled");
         }
     });
-    surnamebooking.addEventListener('input', (e) => {
+    surnamebooking.addEventListener('input', () => {
         let valuename = namebooking.value;
         let valuesurname = surnamebooking.nodeValue;
         if(isValid(valuename) && isValid(valuesurname)){
