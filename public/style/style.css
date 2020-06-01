@@ -1,0 +1,150 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", "sans-serif";
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+}
+
+h1 {
+    font-size: 1.5em;
+    color: rgb(173, 41, 24);
+}
+
+h2 {
+    font-size: 2.3em;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Mise en forme du header */
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+
+header h1 {
+    margin-left: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Mise en forme du slider */
+
+#slider-images {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 800px;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+}
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    background-color: rgb(89, 176, 227);
+    padding: 1em;
+}
+
+figcaption h2, figcaption p {
+    text-align: center;
+    color: white;
+}
+
+figcaption h2 {
+    padding-top: 30px;
+}
+
+figcaption p {
+    font-size: 1.2em;
+}
+
+#slider-images img {
+    width: 100%;
+}
+
+.chevron {
+	font-size: 1.5em;
+	width: 3em;
+	height: 3em;
+	border-radius: 50%;
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0.2);
+	position: absolute;
+	top: calc(50% - 1.5em);
+}
+
+#chevron_left {
+	left: -1.5em;
+}
+
+#chevron_right {
+	right: -1.5em;
+}
+
+.chevron i {
+	position: absolute;
+	top: calc(50% - 12px);
+}
+
+#chevron_left i {
+	left: 1.8em;
+}
+
+#chevron_right i {
+	right: 1.8em;
+}
+
+.player {
+    position: absolute;
+    font-size: 1em;
+	width: 3em;
+	height: 3em;
+	border-radius: 50%;
+    color: #FFFFFF;
+    position: absolute;
+    left: calc(50% - 8px);
+    top: 35px;
+    z-index: 10;
+}
+
+/* Mise en forme du formulaire de réservation */
+
+#canvas {
+    width: 250px;
+    height: 150px;
+    border: 1px solid #000;
+    padding: 1px;
+}
+
+#message-countdown {
+    display: none;
+}
+
+@media all and (max-width: 768px) {
+    h1 {
+        font-size: 1em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    figcaption p {
+        font-size: 1em;
+    }
+
+}   

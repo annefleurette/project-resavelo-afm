@@ -7,6 +7,10 @@ let countdown = document.getElementById("countdown");
 let namebooking = document.getElementById("name");
 let surnamebooking = document.getElementById("surname");
 
+// DIAPORAMA
+let mySlider = new Slider("slider-images", "slide", "chevron_left", "chevron_right", "play", "pause", 3, 5000);
+mySlider.start();
+
 // FORMULAIRE DE RESERVATION
     // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
     namebooking.addEventListener('input', () => {
@@ -53,8 +57,8 @@ let surnamebooking = document.getElementById("surname");
             // On libère le bouton réserver
             //booking.removeAttribute("disabled"); 
             // On lance le décompte
-            let countdown = new Countdown(1200, "countdown", "submit");
-            countdown.start();
+            let myCountdown = new Countdown(1200, "countdown", "submit");
+            myCountdown.start();
         });
         document.addEventListener('timerStart', () => {
             messagecountdown.style.display = "block";
