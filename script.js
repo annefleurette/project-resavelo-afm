@@ -8,7 +8,7 @@ let namebooking = document.getElementById("name");
 let surnamebooking = document.getElementById("surname");
 
 // DIAPORAMA
-let mySlider = new Slider("slider-images", "slide", "chevron_left", "chevron_right", "play", "pause", 3, 5000);
+let mySlider = new Slider("slide", "chevron_left", "chevron_right", "play", "pause", 3, 5000);
 mySlider.start();
 
 // FORMULAIRE DE RESERVATION

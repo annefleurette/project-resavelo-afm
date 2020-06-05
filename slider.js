@@ -1,8 +1,26 @@
+/**
+ * Represents a slider.
+ * @constructor
+ * @param {string} slide - the Class of the elements that are going to slide.
+ * @param {string} prev - the Id of the left chevron.
+ * @param {string} next - the Id of the right chevron.
+ * @param {string} play - the Id of the play element.
+ * @param {string} pause - the Id of the pause element.
+ * @param {number} numberSlides - the number of elements to slide.
+ * @param {number} interval - the timing between two slides.
+ * @method [start] - manage working slider.
+ * @method [showSlide] - displays the current slide.
+ * @method [upSlide] - displays the next slide.
+ * @method [downSlide] - displays the previous slide.
+ * @method [addAuto] - manages automatic slider.
+ * @method [addManualListener] - manages click ans keydown actions.
+ * @method [removeManualListener] - remove click ans keydown actions.
+ */
+
 // Class Diaporama
 
 class Slider {
-    constructor(targetElt, slide, prev, next, play, pause, numberSlides, interval) {
-        this.targetElt = document.getElementById(targetElt);
+    constructor(slide, prev, next, play, pause, numberSlides, interval) {
         this.slide = document.getElementsByClassName(slide);
         this.prev = document.getElementById(prev);
         this.next = document.getElementById(next);

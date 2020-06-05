@@ -1,3 +1,15 @@
+/**
+ * Represents a signature.
+ * @constructor
+ * @param {string} targetElt - the Id of the element which displays the signature.
+ * @param {string} targetClear - the Id of the element which clears the signature.
+ * @method [evenements] - manages clicks ans touchs actions.
+ * @method [getMPosition] - displays mouse position information.
+ * @method [getTPosition] - displays pad position information.
+ * @method [canvasResult] - displays the signature drawing.
+ * @method [clearCanvas] - erases the signature drawing.
+ */
+
 // Class Signature
 
 class Signature {

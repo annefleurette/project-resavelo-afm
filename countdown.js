@@ -1,4 +1,13 @@
 
+/**
+ * Represents a countdown.
+ * @constructor
+ * @param {number} timing - The timing for the countdown.
+ * @param {string} targetElt - the Id of the element which displays the countdown.
+ * @param {string} rootElt - the Id of the element which triggers the countdown.
+ * @method [start] - manage working countdown.
+ */
+
 // Class Décompte
 
 class Countdown {
