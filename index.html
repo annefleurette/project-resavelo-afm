@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="public/style/style.css" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
         <title>Carte interactive de location de vélos à Brisbane</title>
         <meta name="description" content="La carte interactive de location de vélo permet d'afficher la liste des vélos disponibles en temps réel à Brisbane et d'effectuer une réservation.">
         <script src="https://kit.fontawesome.com/d910cf9aae.js" crossorigin="anonymous"></script>
@@ -18,43 +19,46 @@
             </header>
             <section id="slider">
                 <div id="slider-images">
-                    <div class="player">
-                        <span id="play"><i class="fas fa-play"></i></span>
-                        <span id="pause"><i class="fas fa-pause"></i></span>
-                    </div>
                     <figure class="slide">
+                        <div>
+                        <img src="public/images/SLIDE1.png" alt="Bienvenue sur le service de location de vélos de la ville de Brisbane"/>
+                        </div>
                         <figcaption class="slider__presentation">
                             <h2>Bienvenue sur le service de location de vélos de la ville de Brisbane</h2>
                             <p>Envie de découvrir Brisbane autrement ?</p>
                         </figcaption>
-                        <img src="public/images/SLIDE1.png" alt="Bienvenue sur le service de location de vélos de la ville de Brisbane"/>
                     </figure>
                     <figure class="slide">
+                        <img src="public/images/SLIDE2.png" alt="Carte des stations"/>
                         <figcaption class="slider__presentation">
-                            <h2>Carte des stations</h2>
+                            <h2>Explorez la carte des stations de vélos</h2>
                             <p>Trouvez un vélo autour de vous !</p>
                         </figcaption>
-                        <img src="public/images/SLIDE2.png" alt="Carte des stations"/>
                     </figure>
                     <figure class="slide">
-                        <figcaption class="slider__presentation">
-                            <h2>Réservation d'un vélo</h2>
-                            <p>Complétez vos coordonnées et c'est parti pour 20 minutes de balade à vélo !</p>
-                        </figcaption>
                         <img src="public/images/SLIDE3.png" alt="Réservation d'un vélo"/>
+                        <figcaption class="slider__presentation">
+                            <h2>Saisissez vos coordonnées pour réserver un vélo</h2>
+                            <p>C'est parti pour 20 minutes de balade !</p>
+                        </figcaption>
                     </figure>
-                </div>
-                <div>
-                    <span id="chevron_left" class="chevron"><i class="fas fa-chevron-left"></i></span> 
-                    <span id="chevron_right" class="chevron"><i class="fas fa-chevron-right"></i></span>
+                    <div>
+                        <span id="chevron_left" class="chevron"><i class="fas fa-chevron-left"></i></span> 
+                        <span id="chevron_right" class="chevron"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="player">
+                        <span id="play"><i class="fas fa-play"></i></span>
+                        <span id="pause"><i class="fas fa-pause"></i></span>
+                    </div>
                 </div>
             </section>
             <section id="bike-booking">
+                <h2>Réservation d'un vélo</h2>
                 <div class="bike-booking__map">
                     <iframe width="50%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=152.64953613281253%2C-27.66832594367653%2C153.22631835937503%2C-27.269278554175017&amp;layer=mapnik" style="border: 1px solid black"></iframe>
                 </div>
                 <div class="bike-booking__data">
-                    <h2>Détails de la station</h2>
+                    <h3>Détails de la station</h2>
                     <div id="bike-booking__data__info-station">
                     </div>
                     <form>
