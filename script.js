@@ -11,6 +11,10 @@ let surnamebooking = document.getElementById("surname");
 let mySlider = new Slider("slide", "chevron_left", "chevron_right", "play", "pause", 3, 5000);
 mySlider.start();
 
+// CARTE DE LOCALISATION DES VELOS
+infoStations("https://api.jcdecaux.com/vls/v1/stations?contract=Brisbane&apiKey=e4e72c38a3d668f8fb765f8ccc3c4913bfce501f");
+initMap;
+
 // FORMULAIRE DE RESERVATION
     // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
     namebooking.addEventListener('input', () => {
@@ -38,7 +42,7 @@ mySlider.start();
         namebooking.setAttribute("disabled", "true");
         surnamebooking.setAttribute("disabled", "true");
         // On affiche la signature
-        signature.innerHTML = '<h2>Signature</h2><canvas id="canvas"></canvas><p><span id="clear">Recommencer</span></p>';
+        signature.innerHTML = '<h3>Signature</h3><canvas id="canvas"></canvas><p><span id="clear">Recommencer</span></p>';
         let mySignature = new Signature("canvas", "clear");
         mySignature.evenements();
         booking.setAttribute("disabled", "true");

@@ -54,10 +54,9 @@
             </section>
             <section id="bike-booking">
                 <h2>Réservation d'un vélo</h2>
-                <div class="bike-booking__map">
-                    <iframe width="50%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=152.64953613281253%2C-27.66832594367653%2C153.22631835937503%2C-27.269278554175017&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+                <div id="bike-booking__map">
                 </div>
-                <div class="bike-booking__data">
+                <div id="bike-booking__data">
                     <h3>Détails de la station</h2>
                     <div id="bike-booking__data__info-station">
                     </div>
@@ -83,9 +82,12 @@
                 </div>
             </section>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArbS4OzwoMSJBrDWiZKDo96Df-Jf4ZKTM&callback=initMap"
+          async defer></script>
     </body>
     <script type="text/javascript" src="slider.js"></script>
     <script type="text/javascript" src="signature.js"></script>
     <script type="text/javascript" src="countdown.js"></script>
+    <script type="text/javascript" src="map.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </html> 
