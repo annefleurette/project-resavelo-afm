@@ -12,8 +12,6 @@ let mySlider = new Slider("slide", "chevron_left", "chevron_right", "play", "pau
 mySlider.start();
 
 // CARTE DE LOCALISATION DES VELOS
-infoStations("https://api.jcdecaux.com/vls/v1/stations?contract=Brisbane&apiKey=e4e72c38a3d668f8fb765f8ccc3c4913bfce501f");
-initMap;
 
 // FORMULAIRE DE RESERVATION
     // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit

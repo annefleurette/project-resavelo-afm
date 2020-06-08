@@ -6,8 +6,8 @@ async function infoStations(url) {
         if(response.ok) {
             response.json()
             .then(result => {
-                for(let station of result){
-                    let point = {
+                for(var station of result){
+                    var point = {
                         name: station.name,
                         address: station.address,
                         position: {lat: station.position.lat, lng: station.position.lng},
@@ -26,11 +26,12 @@ async function infoStations(url) {
 }
 // On initalise la carte et on affiche les marqueurs
 function initMap() {
+    infoStations("https://api.jcdecaux.com/vls/v1/stations?contract=Brisbane&apiKey=e4e72c38a3d668f8fb765f8ccc3c4913bfce501f");
     var map = new google.maps.Map(document.getElementById('bike-booking__map'), {
         center: {lat: -27.469434, lng: 153.024689},
         zoom: 14
     });
-    for(let markerInfo = 0 ; markerInfo <= markerInfos.length ; markerInfo++) {
+    for(let markerInfo = 0 ; markerInfo < markerInfos.length ; markerInfo++) {
         var marker = new google.maps.Marker({
             position: {lat: markerInfo.position.lat, lng: markerInfo.position.lng},
             map: map,
@@ -44,4 +45,3 @@ function initMap() {
         });
     }
 }
-
