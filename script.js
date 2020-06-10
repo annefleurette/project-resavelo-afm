@@ -12,6 +12,8 @@ let mySlider = new Slider("slide", "chevron_left", "chevron_right", "play", "pau
 mySlider.start();
 
 // CARTE DE LOCALISATION DES VELOS
+//let myMap = new Map("bike-booking__map", "bike-booking__data__info-station", "bike-booking__data");
+//myMap.initMap();
 
 // FORMULAIRE DE RESERVATION
     // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
