@@ -30,7 +30,7 @@
         .then(markerInfos => {
             let map = new google.maps.Map(document.getElementById("bike-booking__map"), {
                 center: {lat: -27.469434, lng: 153.024689},
-                zoom: 14
+                zoom: 16
             });
             for(let markerInfo = 0 ; markerInfo < markerInfos.length ; markerInfo++) {
                 let myStation = new Station("bike-booking__data__info-station", markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, markerInfos[markerInfo].availableStands, markerInfos[markerInfo].availableBikes);

@@ -32,7 +32,7 @@
                         <img src="public/images/SLIDE2.png" alt="Carte des stations"/>
                         <figcaption class="slider__presentation">
                             <h2>Explorez la carte des stations de vélos</h2>
-                            <p>Trouvez un vélo autour de vous !</p>
+                            <p>Cliquez et trouvez un vélo autour de vous !</p>
                         </figcaption>
                     </figure>
                     <figure class="slide">
@@ -53,34 +53,40 @@
                 </div>
             </section>
             <section id="bike-booking">
-                <h2>Réservation d'un vélo</h2>
-                <div id="bike-booking__map">
+                <h2><i class="fas fa-map-marker-alt"></i>Réservation d'un vélo</h2>
+                <div id="bike-booking__blocks">
+                    <div id="bike-booking__map">
+                    </div>
+                    <div id="bike-booking__data">
+                        <h3>Détails de la station</h2>
+                        <div id="bike-booking__data__info-station">
+                        </div>
+                        <h3>Réserver un vélo pour 20 minutes</h2>
+                        <form>
+                            <div>
+                                <label for="name">Nom</label><br />
+                                <input type="text" id="name" name="user_name" minlength="2" required>
+                            </div>
+                            <div>
+                                <label for="surname">Prénom</label><br />
+                                <input type="text" id="surname" name="user_surname" minlength="2" required>
+                            </div>
+                            <div id="signature">
+                            </div>
+                            <div class="button">
+                                <button id="submit" type="submit" disabled="true">Réserver</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div id="bike-booking__data">
-                    <h3>Détails de la station</h2>
-                    <div id="bike-booking__data__info-station">
-                    </div>
-                    <form>
-                        <div>
-                            <label for="name">Nom :</label>
-                            <input type="text" id="name" name="user_name" minlength="2" required>
-                        </div>
-                        <div>
-                            <label for="surname">Prénom :</label>
-                            <input type="text" id="surname" name="user_surname" minlength="2" required>
-                        </div>
-                        <div id="signature">
-                        </div>
-                        <div class="button">
-                            <button id="submit" type="submit" disabled="true">Réserver</button>
-                        </div>
-                    </form>
-                    <div id="bike-booking__data__confirmation">
-                        <p id="message-reservation"></p>
-                        <p><span id="message-countdown"></span><span id="countdown"></span></p>
-                    </div>
+                <div id="bike-booking__data__confirmation">
+                    <p id="message-reservation"></p>
+                    <p><span id="message-countdown"></span><span id="countdown"></span></p>
                 </div>
             </section>
+            <footer>
+                <p>Copyright 2020 Brisbane à vélo.</p>
+            </footer>
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArbS4OzwoMSJBrDWiZKDo96Df-Jf4ZKTM&callback=initMap"
           async defer></script>
