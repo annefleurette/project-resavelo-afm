@@ -1,3 +1,17 @@
+/**
+ * Represents a booking process.
+ * @constructor
+ * @param {string} targetElt - the id of the elements which diplays the map.
+ * @param {string} triggerElt - the id of the trigger element.
+ * @param {string} targetInfos - the information of the stations.
+ * @param {string} targetReservation - the id of the element which displays stations information.
+ * @param {string} link - the link of jcdecaux api.
+ * @method [infoStations] - manage collecting api information.
+ * @method [initMap] - manage map and markers display and behaviours.
+ */
+
+// Class carte de réservation de vélos
+
 class BikesMap {
 
     constructor(targetElt, triggerElt, targetInfos, targetReservation, link) {
@@ -68,8 +82,9 @@ class BikesMap {
                         let myNewStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, newDataStand, newDataBike);
                         marker.station = myNewStation;
                         marker.station.showStation();
+                        
                     });
-                    // On rétablit le nombre de vélos quand la réservation se termine
+                    // On rétablit le nombre de vélos quand la réservation se termine ou quand une nouvelle réservation démarre
                     document.addEventListener('timerStop', () => {
                         marker.station = myStation;
                         marker.station.showStation();
@@ -78,4 +93,5 @@ class BikesMap {
             }
         }); 
     }
+
 } 

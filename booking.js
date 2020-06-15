@@ -1,3 +1,24 @@
+
+/**
+ * Represents a booking process.
+ * @constructor
+ * @param {string} startbooking - the  id of the button whichs triggers the signature display.
+ * @param {string} booking - the id of the booking button.
+ * @param {string} booking_confirmation - the id of the element where booking confirmation appears.
+ * @param {string} signature - the id of the element whichs displays the signature.
+ * @param {string} messagecountdown - the id of the element where booking confirmation message appears.
+ * @param {string} messagecountdown - the id of the element where countdown appears.
+ * @param {string} namebooking - the id of name input.
+ * @param {string} surnamebooking - the id of surname input.
+ * @method [endBookingEvent] - manage booking consequences after signing.
+ * @method [startBookingEvent] - manage first booking consequences after filling the form.
+ * @method [formFilled] - check form completion.
+ * @method [isValid] - build checking process.
+ * @method [countdownAnimation] - manage consequences when countdown starts and ends.
+ */
+
+ // Class Réservation
+
 class Booking {
     constructor(startbooking, booking, booking_confirmation, signature, messagecountdown, countdown, namebooking, surnamebooking) {
         this.startbooking = document.getElementById(startbooking);
@@ -102,15 +123,12 @@ class Booking {
         let stationName = sessionStorage.getItem('name');
         document.addEventListener('timerStart', () => {
             this.booking_confirmation.style.display = "block";
+            this.countdown.style.display = "inline";
             this.messagecountdown.innerHTML = "Vélo réservé à la station " + stationName + "</br>Temps restant : ";
         });
         document.addEventListener('timerStop', () => {
             this.messagecountdown.textContent = "Votre réservation est terminée !";
             this.countdown.style.display = "none";
-            //newStationStands = this.stationStands+-1;
-            //newStationBikes = this.stationBikes-=1;
-            //sessionStorage.setItem('newAvailableStandsStation', newStationStands);
-            //sessionStorage.setItem('newAvailableBikesStation', newStationBikes);
         });
     }
 

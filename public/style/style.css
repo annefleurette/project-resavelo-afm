@@ -32,6 +32,8 @@ p {
 
 input {
     color: rgb(0, 69, 133);
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 button {
