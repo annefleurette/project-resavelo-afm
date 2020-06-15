@@ -1,7 +1,8 @@
-class Map {
+class BikesMap {
 
-    constructor(targetElt, targetInfos, targetReservation, link) {
+    constructor(targetElt, triggerElt, targetInfos, targetReservation, link) {
         this.targetElt = document.getElementById(targetElt);
+        this.triggerElt = document.getElementById(triggerElt);
         this.targetInfos = targetInfos;
         this.targetReservation = document.getElementById(targetReservation);
         this.link = link;
@@ -49,11 +50,32 @@ class Map {
                     title: markerInfos[markerInfo].name,
                     station: myStation
                 });
-                marker.addListener('click', () => {
+                 // On active les informations associées au clic sur chaque marqueur
+                 marker.addListener('click', () => {
                     this.targetReservation.style.display = "block"; 
                     marker.station.showStation();
+                    console.log(marker);
+                    // On enregistre les données de la station dont on peut avoir à se resservir après
+                    sessionStorage.setItem('name', markerInfos[markerInfo].name);
+                    sessionStorage.setItem('status', markerInfos[markerInfo].status);
+                    sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
+                    sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
+                    console.log(sessionStorage.getItem('name'));
+                    // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
+                    this.triggerElt.addEventListener('click', () => {
+                        let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
+                        let newDataBike = sessionStorage.getItem('newAvailableBikesStation');
+                        let myNewStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, newDataStand, newDataBike);
+                        marker.station = myNewStation;
+                        marker.station.showStation();
+                    });
+                    // On rétablit le nombre de vélos quand la réservation se termine
+                    document.addEventListener('timerStop', () => {
+                        marker.station = myStation;
+                        marker.station.showStation();
+                    });  
                 });
             }
         }); 
     }
-}  
+} 

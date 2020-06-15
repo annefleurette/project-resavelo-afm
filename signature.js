@@ -17,7 +17,7 @@ class Signature {
         this.canvas = document.getElementById(targetElt);
         this.ctx = this.canvas.getContext('2d');
         this.ctx.strokeStyle = '#000000';
-        this.ctx.lineWidth = 3;
+        this.ctx.lineWidth = 1;
         this.draw = false;
         this.mousePosition = {
             x: 0,
@@ -44,22 +44,6 @@ class Signature {
         });
        this.canvas.addEventListener("mouseup", (e) => {
             this.draw = false;
-        });
-        // Stop scrolling (touch)
-        document.body.addEventListener("touchstart", (e) => {
-            if (e.target == this.canvas) {
-                e.preventDefault();
-            }
-        });
-        document.body.addEventListener("touchend", (e) => {
-            if (e.target == this.canvas) {
-                e.preventDefault();
-            }
-        });
-        document.body.addEventListener("touchmove", (e) => {
-            if (e.target == this.canvas) {
-                e.preventDefault();
-            }
         });
         // Touchpad
         this.canvas.addEventListener("touchstart", (e) => {
@@ -119,6 +103,5 @@ class Signature {
     // Vide le dessin du canvas
     clearCanvas() {
         this.canvas.width = this.canvas.width;
-        this.ctx.lineWidth = 3;
     }
 }

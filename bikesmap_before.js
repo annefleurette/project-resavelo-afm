@@ -44,7 +44,11 @@
                 marker.addListener('click', () => {
                     document.getElementById("bike-booking__data").style.display = "block"; 
                     marker.station.showStation();
+                    // On enregistre les données de la station dont on peut avoir à se resservir après
+                    sessionStorage.setItem('name', markerInfos[markerInfo].name);
+                    sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
+                    sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
                 });
             }
-        }); 
+        });
     }

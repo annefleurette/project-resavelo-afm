@@ -1,0 +1,74 @@
+    // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
+    namebooking.addEventListener('input', () => {
+        let valuesurname = surnamebooking.value;
+        let valuename = namebooking.nodeValue;
+        if(isValid(valuename) && isValid(valuesurname)){
+            startbooking.removeAttribute("disabled");
+        }
+    });
+    surnamebooking.addEventListener('input', () => {
+        let valuename = namebooking.value;
+        let valuesurname = surnamebooking.nodeValue;
+        if(isValid(valuename) && isValid(valuesurname)){
+            startbooking.removeAttribute("disabled");
+        }
+    });
+    function isValid(value) {
+        return /[a-zA-Z\-]{2,}/.test(value);
+    }
+    // Au clic sur le bouton Continuer
+    startbooking.addEventListener('click', (event) => {
+        // On empêche l'envoi du formulaire
+        event.preventDefault();
+        // On fige les inputs pour qu'il n'y ait plus de modification du nom et du prénom
+        namebooking.setAttribute("disabled", "true");
+        surnamebooking.setAttribute("disabled", "true");
+        // On affiche la signature
+        signature.innerHTML = '<h3>Signature</h3><canvas id="canvas"></canvas><p><span id="clear">Recommencer</span></p>';
+        let mySignature = new Signature("canvas", "clear");
+        mySignature.evenements();
+        // On affiche le bouton submit et on enlève le bouton continuer
+        booking.style.display = "inline";
+        startbooking.style.display = "none";
+        // On vérifie que la personne a bien signé avant d'envoyer le formulaire
+        var canvas = document.getElementById("canvas");
+        canvas.addEventListener('click', () => {
+            booking.removeAttribute("disabled"); 
+        });
+        // On lance le décompte pour 20 minutes et on paramètre les messages adaptés
+        booking.addEventListener('click', (event) => {
+            // On empêche l'envoi du formulaire
+            event.preventDefault();
+            // On efface l'espace signature
+            signature.style.display = "none";
+            // On libère les inputs
+            namebooking.removeAttribute("disabled");
+            surnamebooking.removeAttribute("disabled");
+            // On affiche le bouton continuer et on enlève le bouton submit
+            startbooking.style.display = "inline";
+            booking.style.display = "none";
+            // On lance le décompte
+            let myCountdown = new Countdown(30, "countdown", "submit");
+            myCountdown.start();
+            // On stocke le nom et le prénom pour de futurs usages
+            localStorage.setItem('name', namebooking.value);
+            localStorage.setItem('surname', surnamebooking.value);
+            // On enlève sur la station le vélo emprunté
+            let stationStands = parseInt(sessionStorage.getItem('availableStandsStation'));
+            let newStationStands = stationStands+=1;
+            let stationBikes = parseInt(sessionStorage.getItem('availableBikesStation'));
+            let newStationBikes = stationBikes-=1;
+            sessionStorage.setItem('newAvailableStandsStation', newStationStands);
+            sessionStorage.setItem('newAvailableBikesStation', newStationBikes);
+        });
+        let stationName = sessionStorage.getItem('name');
+        document.addEventListener('timerStart', () => {
+            booking_confirmation.style.display = "block";
+            messagecountdown.innerHTML = "Vélo réservé à la station " + stationName + "</br>Temps restant : ";
+        });
+        document.addEventListener('timerStop', () => {
+            messagecountdown.textContent = "Votre réservation est terminée !";
+            countdown.style.display = "none";
+        });
+        
+    });
