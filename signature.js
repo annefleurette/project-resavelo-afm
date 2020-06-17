@@ -32,7 +32,7 @@ class Signature {
 
     }
     // Gestion des événements 
-    evenements() {
+    evenements = () => {
         // Souris
         this.canvas.addEventListener("mousedown", (e) => {
             this.draw = true;
@@ -73,7 +73,7 @@ class Signature {
         });
     }
     // Renvoie les coordonnées de la souris 
-    getMposition(mouseEvent) {
+    getMposition = (mouseEvent) => {
         if (this.draw) {
             var oRect = this.canvas.getBoundingClientRect();
             return {
@@ -83,7 +83,7 @@ class Signature {
         }
     }
     // Renvoie les coordonnées du pad 
-    getTposition(touchEvent) {
+    getTposition = (touchEvent) => {
         var oRect = this.canvas.getBoundingClientRect();
         return {
             x: touchEvent.touches[0].clientX - oRect.left,
@@ -91,7 +91,7 @@ class Signature {
         };
     }
     // Dessin du canvas
-    canvasResult() {
+    canvasResult = () => {
         if (this.draw) {
             this.ctx.beginPath();
             this.ctx.moveTo(this.lastPosition.x, this.lastPosition.y);
@@ -101,7 +101,7 @@ class Signature {
         }
     };
     // Vide le dessin du canvas
-    clearCanvas() {
+    clearCanvas = () => {
         this.canvas.width = this.canvas.width;
     }
 }

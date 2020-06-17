@@ -20,6 +20,7 @@ class BikesMap {
         this.targetInfos = targetInfos;
         this.targetReservation = document.getElementById(targetReservation);
         this.link = link;
+        this.selectedStation = null;
     }
 
     async infoStations(url) {
@@ -49,7 +50,7 @@ class BikesMap {
             });
             return apiInfos;
     }
-    initMap() {
+    initMap(){
         this.infoStations(this.link)
         .then(markerInfos => {
             let map = new google.maps.Map(this.targetElt, {
@@ -69,12 +70,18 @@ class BikesMap {
                     this.targetReservation.style.display = "block"; 
                     marker.station.showStation();
                     console.log(marker);
+                    this.selectedStation = markerInfos[markerInfo];
+                    sessionStorage.setItem("reservedStation", this.selectedStation);
                     // On enregistre les données de la station dont on peut avoir à se resservir après
+                    console.log(sessionStorage.getItem("reservedStation"));
                     sessionStorage.setItem('name', markerInfos[markerInfo].name);
                     sessionStorage.setItem('status', markerInfos[markerInfo].status);
                     sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
                     sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
                     console.log(sessionStorage.getItem('name'));
+                    // On lance la réservation
+                    let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "canvas");
+                    myBooking.endBookingEvent();
                     // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
                     this.triggerElt.addEventListener('click', () => {
                         let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
@@ -82,7 +89,6 @@ class BikesMap {
                         let myNewStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, newDataStand, newDataBike);
                         marker.station = myNewStation;
                         marker.station.showStation();
-                        
                     });
                     // On rétablit le nombre de vélos quand la réservation se termine ou quand une nouvelle réservation démarre
                     document.addEventListener('timerStop', () => {

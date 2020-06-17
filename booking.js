@@ -29,9 +29,21 @@ class Booking {
         this.countdown = document.getElementById(countdown);
         this.namebooking = document.getElementById(namebooking);
         this.surnamebooking = document.getElementById(surnamebooking);
+        this.reservationDuration = 30;
+        this.myCountdown = new Countdown(this.reservationDuration, "countdown", "submit");
     }
 
-    endBookingEvent() {
+    refreshBooking = () => {
+        let end = sessionStorage.getItem("countdownTiming");
+        if(Date.now() < end) {
+            let newTime = end - Date.now()/1000;
+            let myNewCountdown = new Countdown(newTime, "countdown", "submit");
+            myNewCountdown.start();
+            this.countdownAnimation();
+        }
+    }
+
+    endBookingEvent = () => {
         this.startBookingEvent();
         this.booking.addEventListener('click', (event) => {
             // On empêche l'envoi du formulaire
@@ -39,8 +51,11 @@ class Booking {
             // On efface l'espace signature
             this.signature.style.display = "none";
             // On lance le décompte
-            let myCountdown = new Countdown(30, "countdown", "submit");
-            myCountdown.start();
+            this.myCountdown.start();
+            // On stocke l'avancée du décompte
+            let now = Date.now();
+            let endReservation = now + (this.reservationDuration*1000);
+            sessionStorage.setItem("countdownTiming", endReservation);
             // On stocke le nom et le prénom pour de futurs usages
             localStorage.setItem('name', this.namebooking.value);
             localStorage.setItem('surname', this.surnamebooking.value);
@@ -61,10 +76,10 @@ class Booking {
         this.countdownAnimation();
     }
 
-    startBookingEvent() {
+    startBookingEvent = () =>{
         // On vérifie que les stations sont ouvertes et ont bien des vélos
         let currentStatus = sessionStorage.getItem('status');
-        let currentBikes = sessionStorage.getItem('availableBikesStation');
+        let currentBikes = parseInt(sessionStorage.getItem('availableBikesStation'));
         console.log(sessionStorage.getItem('name'));
         if(currentStatus === "OPEN") {
             if(currentBikes > 0) {
@@ -97,7 +112,7 @@ class Booking {
         }
     }
 
-    formFilled() {
+    formFilled = () => {
         // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
         this.namebooking.addEventListener('input', () => {
             let valuesurname = this.surnamebooking.value;
@@ -115,11 +130,11 @@ class Booking {
         });
     }
 
-    isValid(value) {
+    isValid = (value) => {
         return /[a-zA-Z\-]{2,}/.test(value);
     }
 
-    countdownAnimation() {
+    countdownAnimation = () => {
         let stationName = sessionStorage.getItem('name');
         document.addEventListener('timerStart', () => {
             this.booking_confirmation.style.display = "block";

@@ -17,7 +17,7 @@ class Countdown {
         this.rootElt = document.getElementById(rootElt);
         this.current = null;
     }
-    start() {
+    start = () => {
       // On lance le décompte
       this.current = setInterval(() => {
          let minutes = parseInt(this.timing/60);
