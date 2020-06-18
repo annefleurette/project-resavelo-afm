@@ -71,19 +71,21 @@ class BikesMap {
                     marker.station.showStation();
                     console.log(marker);
                     this.selectedStation = markerInfos[markerInfo];
-                    sessionStorage.setItem("reservedStation", this.selectedStation);
+                    //sessionStorage.setItem("reservedStation", this.selectedStation);
                     // On enregistre les données de la station dont on peut avoir à se resservir après
-                    console.log(sessionStorage.getItem("reservedStation"));
+                    //console.log(sessionStorage.getItem("reservedStation"));
                     sessionStorage.setItem('name', markerInfos[markerInfo].name);
                     sessionStorage.setItem('status', markerInfos[markerInfo].status);
                     sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
                     sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
-                    console.log(sessionStorage.getItem('name'));
                     // On lance la réservation
-                    let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "canvas");
+                    let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "bike-booking__data");
                     myBooking.endBookingEvent();
-                    // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
                     this.triggerElt.addEventListener('click', () => {
+                       // On enregistre le nom de la station où à eu lieu la réservation
+                        let nameBooked = sessionStorage.getItem('name');
+                        sessionStorage.setItem('finalName', nameBooked);
+                        // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
                         let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
                         let newDataBike = sessionStorage.getItem('newAvailableBikesStation');
                         let myNewStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, newDataStand, newDataBike);

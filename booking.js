@@ -20,7 +20,7 @@
  // Class Réservation
 
 class Booking {
-    constructor(startbooking, booking, booking_confirmation, signature, messagecountdown, countdown, namebooking, surnamebooking) {
+    constructor(startbooking, booking, booking_confirmation, signature, messagecountdown, countdown, namebooking, surnamebooking, targetReservation) {
         this.startbooking = document.getElementById(startbooking);
         this.booking = document.getElementById(booking);
         this.booking_confirmation = document.getElementById(booking_confirmation);
@@ -29,7 +29,8 @@ class Booking {
         this.countdown = document.getElementById(countdown);
         this.namebooking = document.getElementById(namebooking);
         this.surnamebooking = document.getElementById(surnamebooking);
-        this.reservationDuration = 30;
+        this.targetReservation = document.getElementById(targetReservation);
+        this.reservationDuration = 60;
         this.myCountdown = new Countdown(this.reservationDuration, "countdown", "submit");
     }
 
@@ -106,9 +107,11 @@ class Booking {
                 });
             }else{
                 alert("Il n'y a plus de vélo disponible à la réservation dans cette station !");
+                this.targetReservation.style.display = "none"; 
             }
         }else{
             alert("La station est fermée vous ne pouvez pas réserver de vélo !");
+            this.targetReservation.style.display = "none"; 
         }
     }
 
@@ -135,7 +138,7 @@ class Booking {
     }
 
     countdownAnimation = () => {
-        let stationName = sessionStorage.getItem('name');
+        let stationName = sessionStorage.getItem('finalName');
         document.addEventListener('timerStart', () => {
             this.booking_confirmation.style.display = "block";
             this.countdown.style.display = "inline";
