@@ -61,26 +61,28 @@
                         <h3>Détails de la station</h2>
                         <div id="bike-booking__data__info-station">
                         </div>
-                        <h3>Réserver un vélo pour 20 minutes</h2>
-                        <form>
-                            <div>
-                                <label for="name">Nom</label><br />
-                                <input type="text" id="name" name="user_name" minlength="2" required>
-                            </div>
-                            <div>
-                                <label for="surname">Prénom</label><br />
-                                <input type="text" id="surname" name="user_surname" minlength="2" required>
-                            </div>
-                            <div id="signature">
-                            </div>
-                            <div class="button">
-                                <button class="btn-reservation" id="continue" type="submit" disabled="true">Continuer</button>
-                                <button class="btn-reservation" id="submit" type="submit" disabled="true">Réserver</button>
-                            </div>
-                        </form>
+                        <div id="form__data">
+                            <h3>Réserver un vélo pour 20 minutes</h3>
+                            <form>
+                                <div>
+                                    <label for="name">Nom</label><br />
+                                    <input type="text" id="name" name="user_name" minlength="2" required>
+                                </div>
+                                <div>
+                                    <label for="surname">Prénom</label><br />
+                                    <input type="text" id="surname" name="user_surname" minlength="2" required>
+                                </div>
+                                <div id="signature">
+                                </div>
+                                <div class="button">
+                                    <button class="btn-reservation" id="continue" type="submit" disabled="true">Continuer</button>
+                                    <button class="btn-reservation" id="submit" type="submit" disabled="true">Réserver</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <p id="bike-booking__data__confirmation"><span id="message-countdown"></span><span id="countdown"></span></p>
+                <p id="bike-booking__data__confirmation"><span id="message-countdown"></span><span id="countdown"></span><span id="cancel" type="submit" disabled="true"><button>Annuler la réservation</button></span></p>
             </section>
             <footer>
                 <p>Copyright 2020 Brisbane à vélo.</p>

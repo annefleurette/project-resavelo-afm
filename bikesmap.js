@@ -55,7 +55,7 @@ class BikesMap {
         .then(markerInfos => {
             let map = new google.maps.Map(this.targetElt, {
                 center: {lat: -27.469434, lng: 153.024689},
-                zoom: 14
+                zoom: 16
             });
             for(let markerInfo = 0 ; markerInfo < markerInfos.length ; markerInfo++) {
                 let myStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, markerInfos[markerInfo].availableStands, markerInfos[markerInfo].availableBikes);
@@ -65,8 +65,8 @@ class BikesMap {
                     title: markerInfos[markerInfo].name,
                     station: myStation
                 });
-                 // On active les informations associées au clic sur chaque marqueur
-                 marker.addListener('click', () => {
+                // On active les informations associées au clic sur chaque marqueur
+                marker.addListener('click', () => {
                     this.targetReservation.style.display = "block"; 
                     marker.station.showStation();
                     console.log(marker);
@@ -79,12 +79,9 @@ class BikesMap {
                     sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
                     sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
                     // On lance la réservation
-                    let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "bike-booking__data");
+                    let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "form__data", "cancel");
                     myBooking.endBookingEvent();
                     this.triggerElt.addEventListener('click', () => {
-                       // On enregistre le nom de la station où à eu lieu la réservation
-                        let nameBooked = sessionStorage.getItem('name');
-                        sessionStorage.setItem('finalName', nameBooked);
                         // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
                         let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
                         let newDataBike = sessionStorage.getItem('newAvailableBikesStation');

@@ -20,7 +20,7 @@
  // Class Réservation
 
 class Booking {
-    constructor(startbooking, booking, booking_confirmation, signature, messagecountdown, countdown, namebooking, surnamebooking, targetReservation) {
+    constructor(startbooking, booking, booking_confirmation, signature, messagecountdown, countdown, namebooking, surnamebooking, targetForm, cancel) {
         this.startbooking = document.getElementById(startbooking);
         this.booking = document.getElementById(booking);
         this.booking_confirmation = document.getElementById(booking_confirmation);
@@ -29,9 +29,10 @@ class Booking {
         this.countdown = document.getElementById(countdown);
         this.namebooking = document.getElementById(namebooking);
         this.surnamebooking = document.getElementById(surnamebooking);
-        this.targetReservation = document.getElementById(targetReservation);
+        this.targetForm = document.getElementById(targetForm);
+        this.cancel = cancel;
         this.reservationDuration = 60;
-        this.myCountdown = new Countdown(this.reservationDuration, "countdown", "submit");
+        this.myCountdown = new Countdown(this.reservationDuration, "countdown", "cancel");
     }
 
     refreshBooking = () => {
@@ -85,6 +86,7 @@ class Booking {
         if(currentStatus === "OPEN") {
             if(currentBikes > 0) {
                 this.formFilled();
+                this.targetForm.style.display = "block";
                 this.startbooking.addEventListener('click', (event) => {
                     // On empêche l'envoi du formulaire
                     event.preventDefault();
@@ -107,11 +109,11 @@ class Booking {
                 });
             }else{
                 alert("Il n'y a plus de vélo disponible à la réservation dans cette station !");
-                this.targetReservation.style.display = "none"; 
+                this.targetForm.style.display = "none";
             }
         }else{
             alert("La station est fermée vous ne pouvez pas réserver de vélo !");
-            this.targetReservation.style.display = "none"; 
+            this.targetForm.style.display = "none";
         }
     }
 
@@ -138,15 +140,18 @@ class Booking {
     }
 
     countdownAnimation = () => {
-        let stationName = sessionStorage.getItem('finalName');
+        let stationName = sessionStorage.getItem('name');
+        console.log(stationName);
         document.addEventListener('timerStart', () => {
             this.booking_confirmation.style.display = "block";
             this.countdown.style.display = "inline";
             this.messagecountdown.innerHTML = "Vélo réservé à la station " + stationName + "</br>Temps restant : ";
+            this.cancel.style.display = "block";
         });
         document.addEventListener('timerStop', () => {
             this.messagecountdown.textContent = "Votre réservation est terminée !";
             this.countdown.style.display = "none";
+            this.cancel.style.display = "none";
         });
     }
 

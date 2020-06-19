@@ -11,13 +11,15 @@
 // Class Décompte
 
 class Countdown {
-    constructor(timing, targetElt, rootElt) {
+    constructor(timing, targetElt, cancelElt) {
         this.timing = timing;
         this.targetElt = document.getElementById(targetElt);
-        this.rootElt = document.getElementById(rootElt);
+        this.cancelElt = document.getElementById(cancelElt);
         this.current = null;
     }
     start = () => {
+      // On vérifie que le décompte n'est pas déjà en cours
+      clearInterval(this.current);
       // On lance le décompte
       this.current = setInterval(() => {
          let minutes = parseInt(this.timing/60);
@@ -34,10 +36,11 @@ class Countdown {
            let event = new Event("timerStop", {bubble: true});
            document.dispatchEvent(event);
          }
-        // On coupe le décompte si on reclique sur le bouton déclencheur
-         this.rootElt.addEventListener("click", () => {
+        // On coupe le décompte si on clique sur le bouton annuler
+         this.cancelElt.addEventListener("click", () => {
            clearInterval(this.current);
          });
       }, 1000); 
    }
+
 }
