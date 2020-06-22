@@ -38,12 +38,17 @@ class Countdown {
            document.dispatchEvent(event);
          }
         // On coupe le décompte si on clique sur le bouton annuler
-         this.cancelElt.addEventListener("click", () => {
-           clearInterval(this.current);
-           sessionStorage.setItem("countdownTiming", null);
-           let event = new Event("timerCancel", {bubble: true});
-           document.dispatchEvent(event);
-         });
+        this.cancelElt.addEventListener("click", () => {
+          clearInterval(this.current);
+          minutes = 0;
+          seconds = 0;
+          displayMinutes = minutes >= 10 ? minutes: `0${minutes}`;
+          displaySeconds = seconds >= 10 ? seconds: `0${seconds}`;
+          this.targetElt.textContent = `${displayMinutes}:${displaySeconds}`;
+          sessionStorage.setItem("countdownTiming", null);
+          let event = new Event("timerCancel", {bubble: true});
+          document.dispatchEvent(event);
+        });
       }, 1000); 
    }
 
