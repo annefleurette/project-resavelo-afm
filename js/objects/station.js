@@ -24,7 +24,7 @@ class Station {
         this.availableBikes = availableBikes;
     }
 
-    showStation = () => {
+    showStation(){
         this.targetElt.innerHTML = "<p>Nom de la station : " + this.name + "</p><p>Adresse : " + this.address + "</p><p>Statut : " + this.status + "</p><p>Nombre d'emplacements : " + this.totalStands + "</p><p>Emplacements disponibles : " + this.availableStands + "</p><p>Vélos disponibles : " + this.availableBikes + "</p>";
     }
 }

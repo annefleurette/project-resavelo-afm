@@ -14,7 +14,7 @@
  * @method [downSlide] - displays the previous slide.
  * @method [addAuto] - manages automatic slider.
  * @method [addManualListener] - manages click ans keydown actions.
- * @method [removeManualListener] - remove click ans keydown actions.
+ * @method [removeManualListener] - removes click ans keydown actions.
  */
 
 // Class Diaporama
@@ -45,7 +45,7 @@ class Slider {
             }
         };
     }
-    start = () => {
+    start(){
         // On affiche le slide
         this.showSlide();
         // On automatise le diaporama
@@ -63,7 +63,7 @@ class Slider {
             this.removeManualListener();
         });
     }
-    showSlide = () => {  
+    showSlide(){  
         // On désactive tous les slides
         for(let u = 0; u <= this.totalIndex; u++) {
             this.slide[u].style.display="none";
@@ -72,7 +72,7 @@ class Slider {
         this.currentSlide = this.slide[this.currentIndex];
         this.currentSlide.style.display = "block";
     }
-    upSlide = () => {
+    upSlide(){
         this.currentIndex++;
         if(this.currentIndex <= this.totalIndex) {
             this.showSlide();
@@ -81,7 +81,7 @@ class Slider {
             this.showSlide();
         } 
     }
-    downSlide = () => {
+    downSlide(){
         this.currentIndex--;
         if(this.currentIndex >= 0) {
           this.showSlide();
@@ -90,21 +90,21 @@ class Slider {
           this.showSlide();
         }
     }
-    addAuto = () => {
+    addAuto(){
         this.autoSlider = setInterval(() => {
         this.upSlide();  
         }, this.interval);
         this.play.style.display = "none";
         this.pause.style.display = "block";
     }
-    addManualListener = () => {
+    addManualListener(){
         // Clic souris
         this.prev.addEventListener("click", this.clickHandlerDown);
         this.next.addEventListener("click", this.clickHandlerUp);
         // Touches clavier
         window.addEventListener("keydown", this.keydownHandler);
     }
-    removeManualListener = () => {
+    removeManualListener(){
         // Clic souris
         this.prev.removeEventListener("click", this.clickHandlerDown);
         this.next.removeEventListener("click", this.clickHandlerUp);

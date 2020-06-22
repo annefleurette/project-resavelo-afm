@@ -7,14 +7,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="public/images/LOGO.png" />
         <title>Carte interactive de location de vélos à Brisbane</title>
         <meta name="description" content="La carte interactive de location de vélo permet d'afficher la liste des vélos disponibles en temps réel à Brisbane et d'effectuer une réservation.">
         <script src="https://kit.fontawesome.com/d910cf9aae.js" crossorigin="anonymous"></script>
     </head>
     <body> 
-        <div class="container"></div>
+        <div class="container">
             <header>
-                <a href="#"><img src="public/images/LOGO.png"alt="Brisbane Bike"/></a>
+                <a href="#"><img src="public/images/LOGO.png" alt="Brisbane Bike"/></a>
                 <h1>Brisbane à vélo</h1>
             </header>
             <section id="slider">
@@ -58,7 +59,7 @@
                     <div id="bike-booking__map">
                     </div>
                     <div id="bike-booking__data">
-                        <h3>Détails de la station</h2>
+                        <h3>Détails de la station</h3>
                         <div id="bike-booking__data__info-station">
                         </div>
                         <div id="form__data">
@@ -75,14 +76,14 @@
                                 <div id="signature">
                                 </div>
                                 <div class="button">
-                                    <button class="btn btn-reservation" id="continue" type="submit" disabled="true">Continuer</button>
-                                    <button class="btn btn-reservation" id="submit" type="submit" disabled="true">Réserver</button>
+                                    <button class="btn btn-reservation" id="continue" type="submit" disabled>Continuer</button>
+                                    <button class="btn btn-reservation" id="submit" type="submit" disabled>Réserver</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <p id="bike-booking__data__confirmation"><span id="message-countdown"></span><span id="countdown"></span><span id="cancel" type="submit" disabled="true"><button class="btn btn-cancelation">Annuler la réservation</button></span></p>
+                <p id="bike-booking__data__confirmation"><span id="message-countdown"></span><span id="countdown"></span><span id="cancel"><button class="btn btn-cancelation" type="submit">Annuler la réservation</button></span></p>
             </section>
             <footer>
                 <p>Copyright 2020 Brisbane à vélo.</p>
@@ -90,12 +91,12 @@
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArbS4OzwoMSJBrDWiZKDo96Df-Jf4ZKTM"
           async defer></script>
-        <script type="text/javascript" src="station.js"></script>
-        <script type="text/javascript" src="slider.js"></script>
-        <script type="text/javascript" src="signature.js"></script>
-        <script type="text/javascript" src="countdown.js"></script>
-        <script type="text/javascript" src="bikesmap.js"></script>
-        <script type="text/javascript" src="booking.js"></script>
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="js/objects/station.js"></script>
+        <script type="text/javascript" src="js/objects/slider.js"></script>
+        <script type="text/javascript" src="js/objects/signature.js"></script>
+        <script type="text/javascript" src="js/objects/countdown.js"></script>
+        <script type="text/javascript" src="js/objects/bikesmap.js"></script>
+        <script type="text/javascript" src="js/objects/booking.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
     </body>
 </html> 

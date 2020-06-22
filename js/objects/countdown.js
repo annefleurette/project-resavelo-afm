@@ -3,23 +3,23 @@
  * Represents a countdown.
  * @constructor
  * @param {number} timing - The timing for the countdown.
- * @param {string} targetElt - the Id of the element which displays the countdown.
- * @param {string} rootElt - the Id of the element which triggers the countdown.
- * @method [start] - manage working countdown.
+ * @param {string} targetElt - the id of the element which displays the countdown.
+ * @param {string} triggerElt - the id of the element which triggers the countdown.
+ * @param {string} cancelElt - the id of the element which cancels countdown working.
+ * @method [start] - manages working countdown.
  */
 
 // Class Décompte
 
 class Countdown {
-    constructor(timing, targetElt, cancelElt) {
+    constructor(timing, targetElt, triggerElt, cancelElt) {
         this.timing = timing;
         this.targetElt = document.getElementById(targetElt);
+        this.triggerElt = document.getElementById(triggerElt);
         this.cancelElt = document.getElementById(cancelElt);
         this.current = null;
     }
-    start = () => {
-      // On vérifie que le décompte n'est pas déjà en cours
-      clearInterval(this.current);
+    start(){
       // On lance le décompte
       this.current = setInterval(() => {
          let minutes = parseInt(this.timing/60);
@@ -33,12 +33,14 @@ class Countdown {
         // On coupe le décompte s'il arrive à zéro
          if(this.timing < 0) {
            clearInterval(this.current);
+           sessionStorage.setItem("countdownTiming", null);
            let event = new Event("timerStop", {bubble: true});
            document.dispatchEvent(event);
          }
         // On coupe le décompte si on clique sur le bouton annuler
          this.cancelElt.addEventListener("click", () => {
            clearInterval(this.current);
+           sessionStorage.setItem("countdownTiming", null);
            let event = new Event("timerCancel", {bubble: true});
            document.dispatchEvent(event);
          });

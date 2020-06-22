@@ -5,20 +5,22 @@
  * @param {string} triggerElt - the id of the trigger element.
  * @param {string} targetInfos - the information of the stations.
  * @param {string} targetReservation - the id of the element which displays stations information.
+ * @param {string} targetForm - the id of the element which displays form.
  * @param {string} link - the link of jcdecaux api.
- * @method [infoStations] - manage collecting api information.
- * @method [initMap] - manage map and markers display and behaviours.
+ * @method [infoStations] - manages collecting api information.
+ * @method [initMap] - manages map and markers display and behaviours.
  */
 
 // Class carte de réservation de vélos
 
 class BikesMap {
 
-    constructor(targetElt, triggerElt, targetInfos, targetReservation, link) {
+    constructor(targetElt, triggerElt, targetInfos, targetReservation, targetForm, link) {
         this.targetElt = document.getElementById(targetElt);
         this.triggerElt = document.getElementById(triggerElt);
         this.targetInfos = targetInfos;
         this.targetReservation = document.getElementById(targetReservation);
+        this.targetForm = document.getElementById(targetForm);
         this.link = link;
         this.selectedStation = null;
     }
@@ -69,17 +71,22 @@ class BikesMap {
                 marker.addListener('click', () => {
                     this.targetReservation.style.display = "block"; 
                     marker.station.showStation();
-                    //this.selectedStation = markerInfos[markerInfo];
-                    //sessionStorage.setItem("reservedStation", this.selectedStation);
-                    // On enregistre les données de la station dont on peut avoir à se resservir après
-                    //console.log(sessionStorage.getItem("reservedStation"));
+                    let currentTiming = sessionStorage.getItem("countdownTiming");
+                    console.log(currentTiming);
+                    // On vérifie qu'une réservation n'est pas déjà en cours
+                    if(Date.now() < currentTiming) {
+                        alert("Vous avez une réservation en cours ! Annulez-la pour en programmer une nouvelle");
+                        this.targetForm.style.display = "none";
+                    }else{
+                    // On enregistre les données de la station
                     sessionStorage.setItem('name', markerInfos[markerInfo].name);
                     sessionStorage.setItem('status', markerInfos[markerInfo].status);
                     sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
                     sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
                     // On lance la réservation
                     let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "form__data", "cancel");
-                    myBooking.endBookingEvent();
+                    myBooking.lastStepBookingEvent();
+                    console.log(currentTiming);
                     this.triggerElt.addEventListener('click', () => {
                         // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
                         let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
@@ -96,7 +103,16 @@ class BikesMap {
                     document.addEventListener('timerCancel', () => {
                         marker.station = myStation;
                         marker.station.showStation();
-                    });  
+                    });
+                    document.addEventListener('timerRenew', () => {
+                        marker.station = myStation;
+                        marker.station.showStation();
+                    }); 
+                    // On laisse le message de réservation affiché même au rechargement de la page
+                    window.addEventListener('unload', () => {
+                        myBooking.refreshBooking();
+                    });
+                }
                 });
             }
         }); 
