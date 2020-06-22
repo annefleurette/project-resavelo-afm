@@ -69,8 +69,7 @@ class BikesMap {
                 marker.addListener('click', () => {
                     this.targetReservation.style.display = "block"; 
                     marker.station.showStation();
-                    console.log(marker);
-                    this.selectedStation = markerInfos[markerInfo];
+                    //this.selectedStation = markerInfos[markerInfo];
                     //sessionStorage.setItem("reservedStation", this.selectedStation);
                     // On enregistre les données de la station dont on peut avoir à se resservir après
                     //console.log(sessionStorage.getItem("reservedStation"));
@@ -89,8 +88,12 @@ class BikesMap {
                         marker.station = myNewStation;
                         marker.station.showStation();
                     });
-                    // On rétablit le nombre de vélos quand la réservation se termine ou quand une nouvelle réservation démarre
+                    // On rétablit le nombre de vélos quand la réservation se termine ou quand on annule la réservation
                     document.addEventListener('timerStop', () => {
+                        marker.station = myStation;
+                        marker.station.showStation();
+                    });  
+                    document.addEventListener('timerCancel', () => {
                         marker.station = myStation;
                         marker.station.showStation();
                     });  

@@ -39,6 +39,8 @@ class Countdown {
         // On coupe le décompte si on clique sur le bouton annuler
          this.cancelElt.addEventListener("click", () => {
            clearInterval(this.current);
+           let event = new Event("timerCancel", {bubble: true});
+           document.dispatchEvent(event);
          });
       }, 1000); 
    }

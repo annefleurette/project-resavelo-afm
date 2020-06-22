@@ -30,7 +30,7 @@ class Booking {
         this.namebooking = document.getElementById(namebooking);
         this.surnamebooking = document.getElementById(surnamebooking);
         this.targetForm = document.getElementById(targetForm);
-        this.cancel = cancel;
+        this.cancel = document.getElementById(cancel);
         this.reservationDuration = 60;
         this.myCountdown = new Countdown(this.reservationDuration, "countdown", "cancel");
     }
@@ -149,6 +149,11 @@ class Booking {
             this.cancel.style.display = "block";
         });
         document.addEventListener('timerStop', () => {
+            this.messagecountdown.textContent = "Votre réservation est terminée !";
+            this.countdown.style.display = "none";
+            this.cancel.style.display = "none";
+        });
+        document.addEventListener('timerCancel', () => {
             this.messagecountdown.textContent = "Votre réservation est terminée !";
             this.countdown.style.display = "none";
             this.cancel.style.display = "none";
