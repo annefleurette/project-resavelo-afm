@@ -51,7 +51,6 @@ class Booking {
             let now = Date.now();
             let endReservation = now + (this.reservationDuration*1000);
             sessionStorage.setItem("countdownTiming", endReservation);
-            console.log(sessionStorage.getItem('countdownTiming'));
             // On stocke le nom et le prénom pour de futurs usages
             localStorage.setItem('name', this.namebooking.value);
             localStorage.setItem('surname', this.surnamebooking.value);
@@ -59,10 +58,8 @@ class Booking {
             let bookingName = sessionStorage.getItem('name');
             sessionStorage.setItem('bookingName', bookingName);
             let bookingAvailableStandsStation = sessionStorage.getItem('availableStandsStation');
-            console.log(bookingAvailableStandsStation);
             sessionStorage.setItem('bookingAvailableStandsStation', bookingAvailableStandsStation);
             let bookingAvailableBikesStation = sessionStorage.getItem('availableBikesStation');
-            console.log(bookingAvailableBikesStation);
             sessionStorage.setItem('bookingAvailableBikesStation', bookingAvailableBikesStation);
             // On enlève sur la station le vélo emprunté
             let stationStands = parseInt(sessionStorage.getItem('bookingAvailableStandsStation'));
@@ -70,9 +67,7 @@ class Booking {
             let newStationStands = stationStands+=1;
             let newStationBikes = stationBikes-=1;
             sessionStorage.setItem('newAvailableStandsStation', newStationStands);
-            console.log(sessionStorage.getItem('newAvailableStandsStation'));
             sessionStorage.setItem('newAvailableBikesStation', newStationBikes);
-            console.log(sessionStorage.getItem('newAvailableBikesStation'));
             // On libère les inputs
             this.namebooking.removeAttribute("disabled");
             this.surnamebooking.removeAttribute("disabled");
@@ -88,12 +83,12 @@ class Booking {
         // On vérifie que les stations sont ouvertes et ont bien des vélos
         let currentStatus = sessionStorage.getItem('status');
         let currentBikes = parseInt(sessionStorage.getItem('availableBikesStation'));
-        console.log(sessionStorage.getItem('name'));
         if(currentStatus === "OPEN") {
             if(currentBikes > 0) {
                 // On pré-remplit le formulaire
                 this.namebooking.value = localStorage.getItem('name');
                 this.surnamebooking.value = localStorage.getItem('surname');
+                // On vérifie que les informations du formulaire sont conformes
                 this.formFilled();
                 this.targetForm.style.display = "block";
                 this.startbooking.addEventListener('click', (event) => {
@@ -153,7 +148,6 @@ class Booking {
 
     countdownAnimation(){
         let stationName = sessionStorage.getItem('bookingName');
-        console.log(stationName);
         document.addEventListener('timerStart', () => {
             this.booking_confirmation.style.display = "block";
             this.countdown.style.display = "inline";
@@ -173,7 +167,6 @@ class Booking {
     }
     refreshBooking(){
         let end = sessionStorage.getItem("countdownTiming");
-        console.log(end);
         if(Date.now() < end) {
             let newTime = end - Date.now()/1000;
             let myNewCountdown = new Countdown(newTime, "countdown", "submit", "cancel");

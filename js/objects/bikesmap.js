@@ -72,47 +72,41 @@ class BikesMap {
                     this.targetReservation.style.display = "block"; 
                     marker.station.showStation();
                     let currentTiming = sessionStorage.getItem("countdownTiming");
-                    console.log(currentTiming);
                     // On vérifie qu'une réservation n'est pas déjà en cours
                     if(Date.now() < currentTiming) {
                         alert("Vous avez une réservation en cours ! Annulez-la pour en programmer une nouvelle");
                         this.targetForm.style.display = "none";
                     }else{
-                    // On enregistre les données de la station
-                    sessionStorage.setItem('name', markerInfos[markerInfo].name);
-                    sessionStorage.setItem('status', markerInfos[markerInfo].status);
-                    sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
-                    sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
-                    // On lance la réservation
-                    let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "form__data", "cancel");
-                    myBooking.lastStepBookingEvent();
-                    console.log(currentTiming);
-                    this.triggerElt.addEventListener('click', () => {
-                        // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
-                        let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
-                        let newDataBike = sessionStorage.getItem('newAvailableBikesStation');
-                        let myNewStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, newDataStand, newDataBike);
-                        marker.station = myNewStation;
-                        marker.station.showStation();
-                    });
-                    // On rétablit le nombre de vélos quand la réservation se termine ou quand on annule la réservation
-                    document.addEventListener('timerStop', () => {
-                        marker.station = myStation;
-                        marker.station.showStation();
-                    });  
-                    document.addEventListener('timerCancel', () => {
-                        marker.station = myStation;
-                        marker.station.showStation();
-                    });
-                    document.addEventListener('timerRenew', () => {
-                        marker.station = myStation;
-                        marker.station.showStation();
-                    }); 
-                    // On laisse le message de réservation affiché même au rechargement de la page
-                    window.addEventListener('unload', () => {
-                        myBooking.refreshBooking();
-                    });
-                }
+                        // On enregistre les données de la station
+                        sessionStorage.setItem('name', markerInfos[markerInfo].name);
+                        sessionStorage.setItem('status', markerInfos[markerInfo].status);
+                        sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
+                        sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
+                        // On lance la réservation
+                        let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "form__data", "cancel");
+                        myBooking.lastStepBookingEvent();
+                        this.triggerElt.addEventListener('click', () => {
+                            // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
+                            let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
+                            let newDataBike = sessionStorage.getItem('newAvailableBikesStation');
+                            let myNewStation = new Station(this.targetInfos, markerInfos[markerInfo].name, markerInfos[markerInfo].address, markerInfos[markerInfo].status, markerInfos[markerInfo].totalStands, newDataStand, newDataBike);
+                            marker.station = myNewStation;
+                            marker.station.showStation();
+                        });
+                        // On rétablit le nombre de vélos quand la réservation se termine ou quand on annule la réservation
+                        document.addEventListener('timerStop', () => {
+                            marker.station = myStation;
+                            marker.station.showStation();
+                        });  
+                        document.addEventListener('timerCancel', () => {
+                            marker.station = myStation;
+                            marker.station.showStation();
+                        });
+                        // On laisse le message de réservation affiché même au rechargement de la page
+                        window.addEventListener('unload', () => {
+                            myBooking.refreshBooking();
+                        });
+                    }
                 });
             }
         }); 
