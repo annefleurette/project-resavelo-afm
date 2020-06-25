@@ -7,6 +7,7 @@
  * @param {string} targetReservation - the id of the element which displays stations information.
  * @param {string} targetForm - the id of the element which displays form.
  * @param {string} link - the link of jcdecaux api.
+ * @param {string} booking_confirmation - the id of the element where booking confirmation appears.
  * @method [infoStations] - manages collecting api information.
  * @method [initMap] - manages map and markers display and behaviours.
  */

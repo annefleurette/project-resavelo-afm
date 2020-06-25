@@ -17,6 +17,7 @@
  * @method [formFilled] - checks form completion.
  * @method [isValid] - builds checksing process.
  * @method [countdownAnimation] - manages consequences when countdown starts and ends.
+ * @method [addListenerBooking] - manages actions when listening clicks on booking trigger.
  * @method [refreshBooking] - manages booking confirmation when page is refreshed.
  */
 
@@ -130,8 +131,6 @@ class Booking {
             event.preventDefault();
             // On efface l'espace signature
             this.signature.style.display = "none";
-            // Décompte
-            this.countdownAnimation();
             // On stocke l'avancée du décompte
             let now = Date.now();
             let endReservation = now + (this.reservationDuration*1000);
@@ -153,6 +152,8 @@ class Booking {
             let newStationBikes = stationBikes-=1;
             sessionStorage.setItem('newAvailableStandsStation', newStationStands);
             sessionStorage.setItem('newAvailableBikesStation', newStationBikes);
+             // Informations décompte
+             this.countdownAnimation();
             // On lance le décompte
             this.myCountdown.start();
             this.myCountdown.timing = this.reservationDuration;
