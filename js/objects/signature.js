@@ -16,8 +16,6 @@ class Signature {
     constructor(targetElt, targetClear) {
         this.canvas = document.getElementById(targetElt);
         this.ctx = this.canvas.getContext('2d');
-        this.ctx.strokeStyle = '#004585';
-        this.ctx.lineWidth = 1;
         this.draw = false;
         this.mousePosition = {
             x: 0,
@@ -104,6 +102,8 @@ class Signature {
     canvasResult(){
         if (this.draw) {
             this.ctx.beginPath();
+            this.ctx.strokeStyle = '#004585';
+            this.ctx.lineWidth = 1;
             this.ctx.moveTo(this.lastPosition.x, this.lastPosition.y);
             this.ctx.lineTo(this.mousePosition.x, this.mousePosition.y);
             this.ctx.stroke();

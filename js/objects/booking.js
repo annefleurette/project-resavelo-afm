@@ -36,49 +36,11 @@ class Booking {
         this.cancel = document.getElementById(cancel);
         this.reservationDuration = 60;
         this.myCountdown = new Countdown(this.reservationDuration, "countdown", "submit", "cancel");
+        this.addListenerBooking();
     }
-
     lastStepBookingEvent(){
         this.firstStepBookingEvent();
-        this.booking.addEventListener('click', (event) => {
-            // On empêche l'envoi du formulaire
-            event.preventDefault();
-            // On efface l'espace signature
-            this.signature.style.display = "none";
-            // On lance le décompte
-            this.myCountdown.start();
-            // On stocke l'avancée du décompte
-            let now = Date.now();
-            let endReservation = now + (this.reservationDuration*1000);
-            sessionStorage.setItem("countdownTiming", endReservation);
-            // On stocke le nom et le prénom pour de futurs usages
-            localStorage.setItem('name', this.namebooking.value);
-            localStorage.setItem('surname', this.surnamebooking.value);
-            //On récupère et on stocke les informations de la station où a eu lieu la réservation
-            let bookingName = sessionStorage.getItem('name');
-            sessionStorage.setItem('bookingName', bookingName);
-            let bookingAvailableStandsStation = sessionStorage.getItem('availableStandsStation');
-            sessionStorage.setItem('bookingAvailableStandsStation', bookingAvailableStandsStation);
-            let bookingAvailableBikesStation = sessionStorage.getItem('availableBikesStation');
-            sessionStorage.setItem('bookingAvailableBikesStation', bookingAvailableBikesStation);
-            // On enlève sur la station le vélo emprunté
-            let stationStands = parseInt(sessionStorage.getItem('bookingAvailableStandsStation'));
-            let stationBikes = parseInt(sessionStorage.getItem('bookingAvailableBikesStation'));
-            let newStationStands = stationStands+=1;
-            let newStationBikes = stationBikes-=1;
-            sessionStorage.setItem('newAvailableStandsStation', newStationStands);
-            sessionStorage.setItem('newAvailableBikesStation', newStationBikes);
-            // On libère les inputs
-            this.namebooking.removeAttribute("disabled");
-            this.surnamebooking.removeAttribute("disabled");
-            // On affiche le bouton continuer et on enlève le bouton submit
-            this.startbooking.style.display = "inline";
-            this.booking.style.display = "none";
-            // Décompte
-            this.countdownAnimation();
-        });
     }
-
     firstStepBookingEvent(){
         // On vérifie que les stations sont ouvertes et ont bien des vélos
         let currentStatus = sessionStorage.getItem('status');
@@ -123,7 +85,6 @@ class Booking {
             this.targetForm.style.display = "none";
         }
     }
-
     formFilled(){
         // On vérifie que les données saisies correspondent à ce que l'on souhaite pour réactiver le bouton Submit
         this.namebooking.addEventListener('input', () => {
@@ -141,11 +102,9 @@ class Booking {
             }
         });
     }
-
     isValid(value){
         return /[a-zA-Z\-]{2,}/.test(value);
     }
-
     countdownAnimation(){
         let stationName = sessionStorage.getItem('bookingName');
         document.addEventListener('timerStart', () => {
@@ -165,15 +124,54 @@ class Booking {
             this.cancel.style.display = "none";
         });
     }
+    addListenerBooking(){
+        this.booking.addEventListener('click', (event) => {
+            // On empêche l'envoi du formulaire
+            event.preventDefault();
+            // On efface l'espace signature
+            this.signature.style.display = "none";
+            // Décompte
+            this.countdownAnimation();
+            // On stocke l'avancée du décompte
+            let now = Date.now();
+            let endReservation = now + (this.reservationDuration*1000);
+            sessionStorage.setItem("countdownTiming", endReservation);
+            // On stocke le nom et le prénom pour de futurs usages
+            localStorage.setItem('name', this.namebooking.value);
+            localStorage.setItem('surname', this.surnamebooking.value);
+            //On récupère et on stocke les informations de la station où a eu lieu la réservation
+            let bookingName = sessionStorage.getItem('name');
+            sessionStorage.setItem('bookingName', bookingName);
+            let bookingAvailableStandsStation = sessionStorage.getItem('availableStandsStation');
+            sessionStorage.setItem('bookingAvailableStandsStation', bookingAvailableStandsStation);
+            let bookingAvailableBikesStation = sessionStorage.getItem('availableBikesStation');
+            sessionStorage.setItem('bookingAvailableBikesStation', bookingAvailableBikesStation);
+            // On enlève sur la station le vélo emprunté
+            let stationStands = parseInt(sessionStorage.getItem('bookingAvailableStandsStation'));
+            let stationBikes = parseInt(sessionStorage.getItem('bookingAvailableBikesStation'));
+            let newStationStands = stationStands+=1;
+            let newStationBikes = stationBikes-=1;
+            sessionStorage.setItem('newAvailableStandsStation', newStationStands);
+            sessionStorage.setItem('newAvailableBikesStation', newStationBikes);
+            // On lance le décompte
+            this.myCountdown.start();
+            this.myCountdown.timing = this.reservationDuration;
+            // On libère les inputs
+            this.namebooking.removeAttribute("disabled");
+            this.surnamebooking.removeAttribute("disabled");
+            // On affiche le bouton continuer et on enlève le bouton submit
+            this.startbooking.style.display = "inline";
+            this.booking.style.display = "none";
+        });
+    }
     refreshBooking(){
         let end = sessionStorage.getItem("countdownTiming");
         if(Date.now() < end) {
-            let newTime = end - Date.now()/1000;
-            let myNewCountdown = new Countdown(newTime, "countdown", "submit", "cancel");
-            myNewCountdown.start();
+            let newTime = (end - Date.now())/1000;
+            this.myCountdown.timing = newTime;
             this.countdownAnimation();
+            this.myCountdown.start();
         }
     }
-
 }
 

@@ -14,17 +14,17 @@
 // Class carte de réservation de vélos
 
 class BikesMap {
-
-    constructor(targetElt, triggerElt, targetInfos, targetReservation, targetForm, link) {
+    constructor(targetElt, triggerElt, targetInfos, targetReservation, targetForm, link, booking_confirmation) {
         this.targetElt = document.getElementById(targetElt);
         this.triggerElt = document.getElementById(triggerElt);
         this.targetInfos = targetInfos;
         this.targetReservation = document.getElementById(targetReservation);
         this.targetForm = document.getElementById(targetForm);
         this.link = link;
+        this.booking_confirmation = document.getElementById(booking_confirmation);
         this.selectedStation = null;
+        this.myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "form__data", "cancel");
     }
-
     async infoStations(url) {
         let apiInfos = await fetch(url)
             .then(response => {
@@ -83,8 +83,7 @@ class BikesMap {
                         sessionStorage.setItem('availableStandsStation', markerInfos[markerInfo].availableStands);
                         sessionStorage.setItem('availableBikesStation', markerInfos[markerInfo].availableBikes);
                         // On lance la réservation
-                        let myBooking = new Booking("continue", "submit", "bike-booking__data__confirmation", "signature", "message-countdown", "countdown", "name", "surname", "form__data", "cancel");
-                        myBooking.lastStepBookingEvent();
+                        this.myBooking.lastStepBookingEvent();
                         this.triggerElt.addEventListener('click', () => {
                             // On modifie le nombre d'emplacements et de vélos quand on finalise la réservation
                             let newDataStand = sessionStorage.getItem('newAvailableStandsStation');
@@ -102,12 +101,14 @@ class BikesMap {
                             marker.station = myStation;
                             marker.station.showStation();
                         });
-                        // On laisse le message de réservation affiché même au rechargement de la page
-                        window.addEventListener('unload', () => {
-                            myBooking.refreshBooking();
-                        });
                     }
                 });
+            }
+            // On s'assure que la confirmation de réservation s'affiche même quand on rafraîchit la page
+            let currentTiming = sessionStorage.getItem("countdownTiming");
+            if(Date.now() < currentTiming) {
+                this.booking_confirmation.style.display = "block";
+                this.myBooking.refreshBooking();
             }
         }); 
     }
