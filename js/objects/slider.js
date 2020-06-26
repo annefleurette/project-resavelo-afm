@@ -1,14 +1,14 @@
 /**
  * Represents a slider.
  * @constructor
- * @param {string} slide - the Class of the elements that are going to slide.
- * @param {string} prev - the Id of the left chevron.
- * @param {string} next - the Id of the right chevron.
- * @param {string} play - the Id of the play element.
- * @param {string} pause - the Id of the pause element.
+ * @param {string} slide - the class of the elements that are going to slide.
+ * @param {string} prev - the id of the left chevron.
+ * @param {string} next - the id of the right chevron.
+ * @param {string} play - the id of the play element.
+ * @param {string} pause - the id of the pause element.
  * @param {number} numberSlides - the number of elements to slide.
  * @param {number} interval - the timing between two slides.
- * @method [start] - manage working slider.
+ * @method [start] - manages working slider.
  * @method [showSlide] - displays the current slide.
  * @method [upSlide] - displays the next slide.
  * @method [downSlide] - displays the previous slide.

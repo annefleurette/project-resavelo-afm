@@ -35,7 +35,7 @@ class Booking {
         this.surnamebooking = document.getElementById(surnamebooking);
         this.targetForm = document.getElementById(targetForm);
         this.cancel = document.getElementById(cancel);
-        this.reservationDuration = 60;
+        this.reservationDuration = 1200;
         this.myCountdown = new Countdown(this.reservationDuration, "countdown", "submit", "cancel");
         this.addListenerBooking();
     }
